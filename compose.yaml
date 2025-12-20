@@ -1,0 +1,75 @@
+services:
+  # --- Service Base de Données ---
+  mariage-db:
+    image: postgres:15-alpine
+    container_name: mariage-db
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    networks:
+      - mariage-network
+    volumes:
+      - mariage-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # --- Service Backend ---
+  mariage-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mariage-backend
+    env_file: .env
+    environment:
+      - POSTGRES_HOST=mariage-db
+    ports:
+      - "${BACKEND_PORT}:8000"
+    depends_on:
+      mariage-db:
+        condition: service_healthy
+    networks:
+      - mariage-network
+    volumes:
+      - .:/app
+      - mariage-media-data:/app/media
+      - mariage-static-data:/app/staticfiles
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/invitations/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # --- AJOUT DU SERVICE PGADMIN ---
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: mariage-pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "${PGADMIN_PORT}:80" # Utilise le port 8026 défini dans votre .env
+    networks:
+      - mariage-network
+    depends_on:
+      - mariage-db
+    restart: unless-stopped
+
+# --- Configuration du Réseau (Correction de l'erreur external) ---
+networks:
+  mariage-network:
+    driver: bridge # Docker créera le réseau lui-même s'il n'existe pas
+
+# --- Volumes Persistants ---
+volumes:
+  mariage-postgres-data:
+  mariage-media-data:
+  mariage-static-data:
