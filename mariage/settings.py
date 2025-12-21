@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "qrcode-toqa.onrender.com" ,
     "https://qrcode-toqa.onrender.com",
+   
    "http://localhost:5173",
     "localhost:8006",
     "mariage-backend",
@@ -108,6 +109,7 @@ WSGI_APPLICATION = "mariage.wsgi.application"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:8080",
+    "https://mariage-qr-git-main-ceverines-projects-07fc9b98.vercel.app/"
     
 ]
 CORS_ALLOW_ALL_ORIGINS = True
