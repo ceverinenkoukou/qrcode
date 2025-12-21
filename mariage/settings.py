@@ -100,6 +100,7 @@ WSGI_APPLICATION = "mariage.wsgi.application"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:8080",
+    "https://mariage-qr-gold.vercel.app"
     # "https://mariage-qr-git-main-ceverines-projects-07fc9b98.vercel.app"
     
 ]
