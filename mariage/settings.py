@@ -100,8 +100,8 @@ TEMPLATES = [
 WSGI_APPLICATION = "mariage.wsgi.application"
 
 CORS_ALLOWED_ORIGINS = [
-    "https://ton-frontend.vercel.app",
-    "http://localhost:5173",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
     
 ]
 CORS_ALLOW_ALL_ORIGINS = True
@@ -109,12 +109,15 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
-        conn_max_age=600,
-        conn_health_checks=True, 
-    )
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='sqlite:///db.sqlite3',
+#         conn_max_age=600
+#     )
+# }
+DATABASES ={
+    'default':dj_database_url.parse(os.getenv('DATABASE_URL'))
+
 }
 
 
