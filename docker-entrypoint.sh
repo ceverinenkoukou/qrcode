@@ -2,7 +2,7 @@
 set -e
 
 echo "Attente de la base de données PostgreSQL..."
-while ! pg_isready -h ${POSTGRES_HOST:-db} -p ${POSTGRES_PORT:-5432} -U ${POSTGRES_USER:-postgres}; do
+while ! PGPASSWORD=vN7ukQ75uUh1xXUrGUoqdqEevPyP2DQo psql -h dpg-d53r0u95pdvs73fodibg-a.oregon-postgres.render.com -U maraige_db_user maraige_db; do
   sleep 1
 done
 
@@ -21,7 +21,7 @@ exec "$@"
 set -e
 
 echo "Attente de la base de données PostgreSQL..."
-while ! pg_isready -h ${POSTGRES_HOST:-db} -p ${POSTGRES_PORT:-5432} -U ${POSTGRES_USER:-postgres}; do
+while ! PGPASSWORD=vN7ukQ75uUh1xXUrGUoqdqEevPyP2DQo psql -h dpg-d53r0u95pdvs73fodibg-a.oregon-postgres.render.com -U maraige_db_user maraige_db; do
   sleep 1
 done
 

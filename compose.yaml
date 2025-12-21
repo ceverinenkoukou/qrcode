@@ -1,75 +1,54 @@
+version: '3.8'
+
 services:
-  # --- Service Base de Données ---
   mariage-db:
-    image: postgres:15-alpine
+    image: postgres:15
     container_name: mariage-db
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      POSTGRES_DB: mariage_db
+      POSTGRES_USER: mariage_user
+      POSTGRES_PASSWORD: vN7ukQ75uUh1xXUrGUoqdqEevPyP2DQo
     ports:
-      - "${DB_PORT}:5432"
-    networks:
-      - mariage-network
+      - "5432:5432"
     volumes:
-      - mariage-postgres-data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U mariage_user -d mariage_db"]
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
 
-  # --- Service Backend ---
   mariage-backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     container_name: mariage-backend
-    env_file: .env
-    environment:
-      - POSTGRES_HOST=mariage-db
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
     ports:
-      - "${BACKEND_PORT}:8000"
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=django-insecure-dev-key-change-in-production
+      - DATABASE_URL=postgresql://maraige_db_user:vN7ukQ75uUh1xXUrGUoqdqEevPyP2DQo@dpg-d53r0u95pdvs73fodibg-a.oregon-postgres.render.com/maraige_db
+      - POSTGRES_HOST=dpg-d53r0u95pdvs73fodibg-a.oregon-postgres.render.com
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=maraige_db
+      - POSTGRES_USER=maraige_db_user
+      - POSTGRES_PASSWORD=vN7ukQ75uUh1xXUrGUoqdqEevPyP2DQo
     depends_on:
       mariage-db:
         condition: service_healthy
-    networks:
-      - mariage-network
-    volumes:
-      - .:/app
-      - mariage-media-data:/app/media
-      - mariage-static-data:/app/staticfiles
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/api/invitations/health/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
-  # --- AJOUT DU SERVICE PGADMIN ---
-  pgadmin:
+  mariage-pgadmin:
     image: dpage/pgadmin4
     container_name: mariage-pgadmin
     environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_DEFAULT_EMAIL: admin@mariage.com
+      PGADMIN_DEFAULT_PASSWORD: gaellemariage
     ports:
-      - "${PGADMIN_PORT}:80" # Utilise le port 8026 défini dans votre .env
-    networks:
-      - mariage-network
+      - "5050:80"
     depends_on:
       - mariage-db
-    restart: unless-stopped
 
-# --- Configuration du Réseau (Correction de l'erreur external) ---
-networks:
-  mariage-network:
-    driver: bridge # Docker créera le réseau lui-même s'il n'existe pas
-
-# --- Volumes Persistants ---
 volumes:
-  mariage-postgres-data:
-  mariage-media-data:
-  mariage-static-data:
+  postgres_data:
