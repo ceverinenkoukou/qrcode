@@ -38,7 +38,9 @@ DEBUG = os.getenv('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "http://localhost:5173",
+    "qrcode-toqa.onrender.com" ,
+    "https://qrcode-toqa.onrender.com",
+   "http://localhost:5173",
     "localhost:8006",
     "mariage-backend",
     "mariage.localhost",
