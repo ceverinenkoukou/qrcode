@@ -17,7 +17,7 @@ class GuestViewSet(viewsets.ModelViewSet):
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer
     
-    @action(detail=False, methods=['post'], url_path='scan/(?P<code>[^/.]+)')
+    @action(detail=False, methods=['post'], url_path='scan/<str:code>')
     def scan(self, request, code=None):
         """Action pour scanner un QR Code"""
         ip_addr = request.META.get('REMOTE_ADDR')
