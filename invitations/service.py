@@ -6,29 +6,29 @@ from .models import Guest, WeddingConfig, ScanLog, Table
 from django.db import transaction
 
 # Le message complet tel que vous l'avez fourni
-INVITATION_TEXT = """✨ INVITATION ✨
+INVITATION_TEXT = """✨ INVITATION ✨\n
 
-🙏 Avec la grâce de Dieu et la bénédiction de nos ancêtres 🙏
+🙏 Avec la grâce de Dieu et la bénédiction de nos ancêtres 🙏\n
 
-Les familles Feu Ndong Nsolo Joseph, Feu Nkounkou Malonga Marcel, Feu Minko Mi Ndong Patrice.
-Ainsi que les familles feu Inama Théophile, feu Missono Auguste, Moukoumbi Inama Jean-Christophe, Manguedi Rosalie Ep Inama,
+Les familles Feu Ndong Nsolo Joseph, Feu Nkounkou Malonga Marcel, Feu Minko Mi Ndong Patrice.\n
+Ainsi que les familles feu Inama Théophile, feu Missono Auguste, Moukoumbi Inama Jean-Christophe, Manguedi Rosalie Ep Inama,\n
 
- ont l'immense joie de vous annoncer l'union coutumière de leurs enfants :
+ ont l'immense joie de vous annoncer l'union coutumière de leurs enfants :\n\n
 
-💍 Gaëlle Denise Ekombeng Minko & Théophile Crépin Hinama Moukoumbi 💍
+💍 Gaëlle Denise Ekombeng Minko & Théophile Crépin Hinama Moukoumbi 💍\n
 
-Cette grande célébration selon nos us et coutumes gabonaises se tiendra le samedi 27 décembre 2027 à Nzeng-Ayong (ancienne cité, face restaurant Tsoumou), suivie d'un dîner à la salle des fêtes d'Avorbam (Rond-point Avorbam, panier Mbeto). 🥂
+Cette grande célébration selon nos us et coutumes gabonaises se tiendra le samedi 27 décembre 2027\n à Nzeng-Ayong (ancienne cité, face restaurant Tsoumou), suivie d'un dîner à la salle des fêtes d'Avorbam (Rond-point Avorbam, panier Mbeto). 🥂\n
 
-Votre présence sera la bienvenue.
-Nous espérons vous compter parmi nos convives. ❤️
+Votre présence sera la bienvenue.\n
+Nous espérons vous compter parmi nos convives. ❤️\n
 
-✨ PROGRAMME ✨
+✨ PROGRAMME ✨\n
 
-⭐ 09 h 30 : Mise en place terminée à Nzeng-Ayong.
-⭐ 10 h 00 : Début des pourparlers.
-⭐ 15 h 00 : Fin de la cérémonie.
-⭐ 17 h 30 : Mise en place terminée à la salle d'Avorbam.
-⭐ 18 h 00 : Arrivée des mariés.
+⭐ 09 h 30 : Mise en place terminée à Nzeng-Ayong.\n
+⭐ 10 h 00 : Début des pourparlers.\n
+⭐ 15 h 00 : Fin de la cérémonie.\n
+⭐ 17 h 30 : Mise en place terminée à la salle d'Avorbam.\n
+⭐ 18 h 00 : Arrivée des mariés.\n
 ⭐ 18 h 30 : Début de la soirée."""
 
 class GuestService:
