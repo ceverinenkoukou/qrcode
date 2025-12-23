@@ -43,7 +43,7 @@ class Table(models.Model):
 
 class WeddingConfig(models.Model):
     """Stocke la configuration globale"""
-    total_capacity = models.IntegerField(default=370)
+    total_capacity = models.IntegerField(default=390)
     current_occupancy = models.IntegerField(default=0)
 
     def remaining_seats(self):

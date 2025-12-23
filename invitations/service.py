@@ -17,7 +17,7 @@ Ainsi que les familles feu Inama Théophile, feu Missono Auguste, Moukoumbi Inam
 
 💍 Gaëlle Denise Ekombeng Minko & Théophile Crépin Hinama Moukoumbi 💍\n
 
-Cette grande célébration selon nos us et coutumes gabonaises se tiendra le samedi 27 décembre 2027\n à Nzeng-Ayong (ancienne cité, face restaurant Tsoumou), suivie d'un dîner à la salle des fêtes d'Avorbam (Rond-point Avorbam, panier Mbeto). 🥂\n
+Cette grande célébration selon nos us et coutumes gabonaises se tiendra le samedi 27 décembre 2025\n à Nzeng-Ayong (ancienne cité, face restaurant Tsoumou), suivie d'un dîner à la salle des fêtes d'Avorbam (Rond-point Avorbam, panier Mbeto). 🥂\n
 
 Votre présence sera la bienvenue.\n
 Nous espérons vous compter parmi nos convives. ❤️\n
